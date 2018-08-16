@@ -10,8 +10,8 @@ namespace IdentityModel.UnitTests
 {
     public class DiscoveryCacheTests
     {
-        NetworkHandler _successHandler;
-        string _authority = "https://demo.identityserver.io";
+        readonly NetworkHandler _successHandler;
+        readonly string _authority = "https://demo.identityserver.io";
 
         public DiscoveryCacheTests()
         {
@@ -33,10 +33,10 @@ namespace IdentityModel.UnitTests
         }
 
         [Fact]
-        public async Task New_initialization_should_work()
+        public async Task Implicit_client_should_work()
         {
             var client = new HttpClient(_successHandler);
-            var cache = new DiscoveryCache(_authority, client);
+            var cache = new DiscoveryCache(_authority);
 
             var disco = await cache.GetAsync();
 
@@ -44,10 +44,10 @@ namespace IdentityModel.UnitTests
         }
 
         [Fact]
-        public async Task Old_initialization_should_work()
+        public async Task Explicit_client_should_work()
         {
-            var client = new DiscoveryClient(_authority, _successHandler);
-            var cache = new DiscoveryCache(client);
+            var client = new HttpClient(_successHandler);
+            var cache = new DiscoveryCache(_authority, () => new HttpClient());
 
             var disco = await cache.GetAsync();
 

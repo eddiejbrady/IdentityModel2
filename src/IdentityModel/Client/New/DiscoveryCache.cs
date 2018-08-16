@@ -24,44 +24,16 @@ namespace IdentityModel.Client
         /// Initialize instance of DiscoveryCache with passed authority.
         /// </summary>
         /// <param name="authority">Base address or discovery document endpoint.</param>
-        /// <param name="client">The client.</param>
-        /// <param name="policy">The policy.</param>
-        public DiscoveryCache(string authority, HttpClient client = null, DiscoveryPolicy policy = null)
-        {
-            _authority = authority;
-            _policy = policy ?? new DiscoveryPolicy();
-
-            if (client == null)
-            {
-                _getHttpClient = () => new HttpClient();
-            }
-            else
-            {
-                _getHttpClient = () => client;
-            }
-        }
-
-        /// <summary>
-        /// Initialize instance of DiscoveryCache with passed authority.
-        /// </summary>
-        /// <param name="authority">Base address or discovery document endpoint.</param>
         /// <param name="httpClientFunc">The HTTP client function.</param>
         /// <param name="policy">The policy.</param>
-        public DiscoveryCache(string authority, Func<HttpClient> httpClientFunc, DiscoveryPolicy policy = null)
+        public DiscoveryCache(string authority, Func<HttpClient> httpClientFunc = null, DiscoveryPolicy policy = null)
         {
             _authority = authority;
             _policy = policy ?? new DiscoveryPolicy();
-            _getHttpClient = httpClientFunc ?? throw new ArgumentNullException(nameof(httpClientFunc));
-        }
 
-        /// <summary>
-        /// Initialize instance of DiscoveryCache with passed DiscoveryClient.
-        /// </summary>
-        /// <param name="client">DiscoveryClient to use for obtaining discovery document.</param>
-        [Obsolete("Will be removed in a future version")]
-        public DiscoveryCache(DiscoveryClient client)
-            : this(client.Authority, new HttpClient(), client.Policy)
-        { }
+            if (httpClientFunc == null) httpClientFunc = () => new HttpClient();
+            _getHttpClient = httpClientFunc;
+        }
 
         /// <summary>
         /// Frequency to refresh discovery document. Defaults to 24 hours.
