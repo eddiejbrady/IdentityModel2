@@ -22,23 +22,13 @@ namespace IdentityModel.Internal
         [DebuggerStepThrough]
         public static string EnsureTrailingSlash(this string url)
         {
-            if (!url.EndsWith("/"))
-            {
-                return url + "/";
-            }
-
-            return url;
+            return url.RemoveTrailingSlash() + "/";
         }
 
         [DebuggerStepThrough]
         public static string RemoveTrailingSlash(this string url)
         {
-            if (url != null && url.EndsWith("/"))
-            {
-                url = url.Substring(0, url.Length - 1);
-            }
-
-            return url;
+            return url.TrimEnd('/');
         }
     }
 }
