@@ -12,30 +12,30 @@ namespace IdentityModel.Client
     /// Models an OpenID Connect dynamic client registration response
     /// </summary>
     /// <seealso cref="IdentityModel.Client.Response" />
-    public class RegistrationResponse : Response
+    public class DynamicClientRegistrationResponse : Response
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RegistrationResponse"/> class.
+        /// Initializes a new instance of the <see cref="DynamicClientRegistrationResponse"/> class.
         /// </summary>
         /// <param name="raw">The raw response data.</param>
-        public RegistrationResponse(string raw) : base(raw)
+        public DynamicClientRegistrationResponse(string raw) : base(raw)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RegistrationResponse"/> class.
+        /// Initializes a new instance of the <see cref="DynamicClientRegistrationResponse"/> class.
         /// </summary>
         /// <param name="exception">The exception.</param>
-        public RegistrationResponse(Exception exception) : base(exception)
+        public DynamicClientRegistrationResponse(Exception exception) : base(exception)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RegistrationResponse"/> class.
+        /// Initializes a new instance of the <see cref="DynamicClientRegistrationResponse"/> class.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <param name="reason">The reason.</param>
-        public RegistrationResponse(HttpStatusCode statusCode, string reason) : base(statusCode, reason)
+        public DynamicClientRegistrationResponse(HttpStatusCode statusCode, string reason) : base(statusCode, reason)
         {
         }
 

@@ -22,7 +22,7 @@ namespace IdentityModel.Client
         /// <param name="request">The request.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public static async Task<IntrospectionResponse> IntrospectTokenAsync(this HttpMessageInvoker client, TokenIntrospectionRequest request, CancellationToken cancellationToken = default)
+        public static async Task<TokenIntrospectionResponse> IntrospectTokenAsync(this HttpMessageInvoker client, TokenIntrospectionRequest request, CancellationToken cancellationToken = default)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, request.Address);
             httpRequest.Headers.Accept.Clear();
@@ -42,15 +42,15 @@ namespace IdentityModel.Client
             }
             catch (Exception ex)
             {
-                return new IntrospectionResponse(ex);
+                return new TokenIntrospectionResponse(ex);
             }
             if (response.IsSuccessStatusCode)
             {
-                return new IntrospectionResponse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                return new TokenIntrospectionResponse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
             else
             {
-                return new IntrospectionResponse(response.StatusCode, response.ReasonPhrase);
+                return new TokenIntrospectionResponse(response.StatusCode, response.ReasonPhrase);
             }
         }
     }

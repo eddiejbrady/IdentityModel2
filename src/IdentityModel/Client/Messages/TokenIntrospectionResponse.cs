@@ -14,13 +14,13 @@ namespace IdentityModel.Client
     /// Models an OAuth 2.0 introspection response
     /// </summary>
     /// <seealso cref="IdentityModel.Client.Response" />
-    public class IntrospectionResponse : Response
+    public class TokenIntrospectionResponse : Response
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IntrospectionResponse"/> class.
+        /// Initializes a new instance of the <see cref="TokenIntrospectionResponse"/> class.
         /// </summary>
         /// <param name="raw">The raw response data.</param>
-        public IntrospectionResponse(string raw) : base(raw)
+        public TokenIntrospectionResponse(string raw) : base(raw)
         {
             if (!IsError)
             {
@@ -58,19 +58,19 @@ namespace IdentityModel.Client
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IntrospectionResponse"/> class.
+        /// Initializes a new instance of the <see cref="TokenIntrospectionResponse"/> class.
         /// </summary>
         /// <param name="exception">The exception.</param>
-        public IntrospectionResponse(Exception exception) : base(exception)
+        public TokenIntrospectionResponse(Exception exception) : base(exception)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IntrospectionResponse"/> class.
+        /// Initializes a new instance of the <see cref="TokenIntrospectionResponse"/> class.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <param name="reason">The reason.</param>
-        public IntrospectionResponse(HttpStatusCode statusCode, string reason) : base(statusCode, reason)
+        public TokenIntrospectionResponse(HttpStatusCode statusCode, string reason) : base(statusCode, reason)
         {
         }
 

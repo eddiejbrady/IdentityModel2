@@ -25,7 +25,7 @@ namespace IdentityModel.Client
         /// <param name="request">The request.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public static async Task<RegistrationResponse> RegisterClientAsync(this HttpMessageInvoker client, DynamicClientRegistrationRequest request, CancellationToken cancellationToken = default)
+        public static async Task<DynamicClientRegistrationResponse> RegisterClientAsync(this HttpMessageInvoker client, DynamicClientRegistrationRequest request, CancellationToken cancellationToken = default)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, request.Address)
             {
@@ -47,17 +47,17 @@ namespace IdentityModel.Client
             }
             catch (Exception ex)
             {
-                return new RegistrationResponse(ex);
+                return new DynamicClientRegistrationResponse(ex);
             }
 
             if (response.StatusCode == HttpStatusCode.Created || response.StatusCode == HttpStatusCode.BadRequest)
             {
                 var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                return new RegistrationResponse(content);
+                return new DynamicClientRegistrationResponse(content);
             }
             else
             {
-                return new RegistrationResponse(response.StatusCode, response.ReasonPhrase);
+                return new DynamicClientRegistrationResponse(response.StatusCode, response.ReasonPhrase);
             }
         }
     }
